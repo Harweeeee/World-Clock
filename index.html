@@ -4,7 +4,6 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Global dial</title>
-        <link rel="stylesheet" href="src/styles.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
@@ -19,6 +18,40 @@
         />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.44/moment-timezone-with-data-1970-2030.min.js"></script>
+        <style>
+            body {
+                font-family: Noto Sans;
+            }
+
+            header {
+                text-align: center;
+            }
+
+            h3 {
+                font-family: Single Day;
+                font-size: 50px;
+                margin: 0;
+                border-bottom: 1px solid grey;
+            }
+
+            p {
+                margin-bottom: 10px;
+            }
+
+            select {
+                color: rgb(239, 161, 15);
+                width: 200px;
+                height: 40px;
+                text-align: center;
+                border-radius: 4px;
+                font-size: 20px;
+                font-family: Noto Sans;
+            }
+
+            #select-drop {
+                text-align: center;
+            }
+        </style>
     </head>
     <body>
         <header>
@@ -33,6 +66,20 @@
                 <option value="Australia/Sydney">Sydney</option>
             </select>
         </div>
-        <script src="src/index.js"></script>
+        <script>
+            function display() {
+                let cities = document.querySelector('#cities')
+                let citySelected = cities.options[cities.selectedIndex].value
+                let cityName = cities.options[cities.selectedIndex].text
+                if (citySelected === 'Select a city...') {
+                    return
+                }
+                let dateTime = moment.tz(citySelected).format('LL[, at] LTS')
+
+                alert(`It is currently ${dateTime} in ${cityName}`)
+            }
+
+            cities.addEventListener('change', display)
+        </script>
     </body>
 </html>
