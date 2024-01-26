@@ -1,16 +1,13 @@
-function alert() {
+function display() {
     let cities = document.querySelector('#cities')
     let citySelected = cities.options[cities.selectedIndex].value
-    let cityMap = {
-        paris: moment.tz('Europe/Paris'),
-        tokyo: moment.tz('Asia/Tokyo'),
-        sydney: moment.tz('Australia/Sydney'),
+    let cityName = cities.options[cities.selectedIndex].text
+    if (citySelected === 'Select a city...') {
+        return
     }
-    let dateTime = cityMap[citySelected].format('LL[, at] LTS')
+    let dateTime = moment.tz(citySelected).format('LL[, at] LTS')
 
-    if (citySelected === cityMap[citySelected]) {
-        alert(`Hi`)
-    }
+    alert(`It is currently ${dateTime} in ${cityName}`)
 }
 
-cities.addEventListener('change', alert)
+cities.addEventListener('change', display)
